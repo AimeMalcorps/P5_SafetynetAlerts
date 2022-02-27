@@ -29,4 +29,9 @@ public class PersonController {
 	public Childalert getChildAlert(@RequestParam String adress) throws JSONException, IOException, ParseException {
 		return personService.getChildAlert(adress);
 	}
+	
+	@GetMapping(value="/communityEmail")
+	public List<String> getPersonsEmail(@RequestParam String city) throws JSONException, IOException, ParseException {
+		return personService.getEmail(city);
+	}
 }

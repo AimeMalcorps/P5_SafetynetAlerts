@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.alerts.model.Data;
+import com.safetynet.alerts.model.Fire;
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.model.Person;
+import com.safetynet.alerts.model.PhoneNumber;
 
 @Service
 public class FirestationService {
@@ -65,17 +67,62 @@ public class FirestationService {
 		return firestation;
 	}
 
-	public Firestation getFirestationFromNumber(Integer number) {
-
+	public List<PhoneNumber> getPhoneNumberList(Integer stationNumber) {
+		
+		List<PhoneNumber> phoneNumberList = new ArrayList<PhoneNumber>();
 		Data data = jsonReader.getData();
+		List<String> addresses = new ArrayList<String>();
 
-		Firestation firestation = new Firestation();
-
-		for (Firestation item : data.getFirestations()) {
-			if (item.getStation().equals(number))
-				firestation = item;
+		for (Firestation firestation : data.getFirestations()) {
+			if (firestation.getStation() == stationNumber) {
+				addresses.add(firestation.getAddress());
+			}
 		}
-		return firestation;
+
+		List<Person> personList = data.getPersons().stream().filter(item -> addresses.contains(item.getAddress()))
+				.collect(Collectors.toList());
+		
+		for(Person person : personList) {
+			PhoneNumber phoneNumber = new PhoneNumber();
+			phoneNumber.setFirstName(person.getFirstName());
+			phoneNumber.setLastName(person.getLastName());
+			phoneNumber.setPhone(person.getPhone());
+			phoneNumberList.add(phoneNumber);
+		}
+		
+		return phoneNumberList;
 	}
+	
+	public Fire fireAlert(String address) {
+		
+		Fire fire = new Fire();
+		Data data = jsonReader.getData();
+		int firestationNumber = 0;
+		
+		for(Firestation firestation : data.getFirestations()) {
+			if (firestation.getAddress().equals(address))
+				firestationNumber = firestation.getStation();
+		}
+		
+		List<Person> personList = data.getPersons().stream().filter(item -> item.getAddress().equals(address))
+				.collect(Collectors.toList());
+		
+		fire.setFirestationNumber(firestationNumber);
+		fire.setPersonList(personList);
+		return fire;
+	}
+	
+	public List<Firestation> floodAlert(List<Integer> stationNumberList) throws ParseException {
+		
+		List<Firestation> allPersonsList = new ArrayList<Firestation>();
+		
+		for(int stationNumber : stationNumberList) {
+			allPersonsList.add(getPersons(stationNumber));
+		}
+		
+		return allPersonsList;
+	}
+	
+	
 
 }

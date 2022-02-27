@@ -71,7 +71,6 @@ public class PersonService {
 		List<Person> personsAtAdress = persons.stream().filter(item -> (item.getAddress().equalsIgnoreCase(adress)))
 				.collect(Collectors.toList());
 		
-		//Iterator<String> iterator = list.iterator(); iterator.hasNext();
 		for (Person person : personsAtAdress) {
 
 			person.setBirthdate(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()).getBirthdate());
@@ -104,6 +103,18 @@ public class PersonService {
 			childalert.setOthers(othersList);
 			return childalert;
 		}		
+	}
+	
+	public List<String> getEmail(String city) {
+		
+		List<String> emailList = new ArrayList<String>();
+		
+		for(Person person : jsonReader.getData().getPersons()) {
+			if (person.getCity().equals(city))
+				emailList.add(person.getEmail());
+		}
+		
+		return emailList;
 	}
 	
 }
