@@ -1,6 +1,8 @@
 package com.safetynet.alerts.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Person {
 	
@@ -8,7 +10,7 @@ public class Person {
 	private String lastName;
 	private String address;
 	private String city;
-	private Integer zip;
+	private int zip;
 	private String phone;
 	private String email;
 	
@@ -17,6 +19,11 @@ public class Person {
 	private List<String> allergies;
 
 	public String getFirstName() {
+		
+		Map<String, Object> test = new HashMap<String, Object>();
+		test.put("person", new Person());
+		test.put("caserne", new Firestation());
+		
 		return firstName;
 	}
 
@@ -95,5 +102,4 @@ public class Person {
 	public void setAllergies(List<String> allergies) {
 		this.allergies = allergies;
 	}
-
 }
