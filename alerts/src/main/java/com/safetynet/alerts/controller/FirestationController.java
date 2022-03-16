@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +27,7 @@ public class FirestationController {
 	
 	@GetMapping(value="/firestation")
 	public Firestation getPersonCovered(@RequestParam Integer stationNumber) throws JSONException, IOException, ParseException {
-		return firestationService.getPersons(stationNumber);
+		return firestationService.getPersonsCovered(stationNumber);
 	}
 	
 	@GetMapping(value="/phoneAlert")
@@ -40,5 +44,29 @@ public class FirestationController {
 	public List<Firestation> getPhoneNumbers(@RequestParam List<Integer> stations) throws JSONException, IOException, ParseException {
 		return firestationService.floodAlert(stations);
 	}
+	
+	/****** CRUD *****/
+	
+	@PostMapping(value = "/create/firestation")
+	public Firestation createFirestation(@RequestBody Firestation fs) throws JSONException, IOException {
+		return firestationService.createFirestation(fs);
+	}
+	
+	@GetMapping("/get/firestation")
+	public Firestation get(@RequestParam String address) throws JSONException, IOException {
+		return firestationService.getFirestation(address);
+	}
+	
+	@PutMapping(value = "/update/firestation")
+	public Firestation updateFirestation(@RequestBody Firestation fs) throws JSONException, IOException {
+		return firestationService.updateFirestation(fs);
+	}
+	
+	@DeleteMapping("/delete/firestation")
+	public Firestation delete(@RequestParam String address) throws JSONException, IOException {
+		return firestationService.deleteFirestation(address);
+	}
+	
+	
 
 }
