@@ -29,7 +29,7 @@ public class PersonService {
 	private static final Logger logger = LoggerFactory.getLogger(PersonService.class);
 
 	/* Get persons based on name */
-	public List<Person> getPersonInfo(String firstName, String lastName) {
+	public List<Person> getPersons(String firstName, String lastName) {
 
 		List<Person> personList = null;
 
@@ -46,24 +46,25 @@ public class PersonService {
 					.collect(Collectors.toList());
 
 			for (Person person : personList) {
-				person.setBirthdate(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
-						.getBirthdate());
-				person.setMedications(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
-						.getMedications());
-				person.setAllergies(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
-						.getAllergies());
+				if (medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()) != null) {
+					person.setBirthdate(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
+							.getBirthdate());
+					person.setMedications(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
+							.getMedications());
+					person.setAllergies(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
+							.getAllergies());
+				}
 			}
-
 			return personList;
 
 		} catch (Exception ure) {
-			logger.info("ERROR");
+			logger.error("ERROR : " + personList);
 			return personList;
 		}
 	}
 
 	public Childalert getChildAlert(String adress) throws ParseException {
-		logger.info(" " + adress);
+		
 		List<Person> persons = jsonReader.getData().getPersons();
 
 		List<Child> childList = new ArrayList<Child>();
@@ -115,6 +116,50 @@ public class PersonService {
 		}
 		
 		return emailList;
+	}
+	
+	/** CUD **/
+	
+	public Person createPerson(Person person) {
+		
+		if (person.getFirstName() != null && person.getLastName() != null) {
+			if (getPersons(person.getFirstName(), person.getLastName()).size() == 0) {
+				jsonReader.getData().getPersons().add(person);
+			}
+		}
+		return getPersons(person.getFirstName(), person.getLastName()).get(0);
+	}
+	
+	public Person updatePerson(Person person) {
+		
+		if (person.getFirstName() != null && person.getLastName() != null) {
+			Person personToUpdate = getPersons(person.getFirstName(), person.getLastName()).get(0);
+			
+			jsonReader.getData().getPersons().remove(personToUpdate);
+			
+			if (person.getAddress() != null)
+				personToUpdate.setAddress(person.getAddress());
+			if (person.getCity() != null)
+				personToUpdate.setCity(person.getCity());
+			if (person.getZip() != 0)
+				personToUpdate.setZip(person.getZip());
+			if (person.getPhone() != null)
+				personToUpdate.setPhone(person.getPhone());
+			if (person.getEmail() != null)
+				personToUpdate.setEmail(person.getEmail());
+			
+			jsonReader.getData().getPersons().add(person);
+		}
+		return getPersons(person.getFirstName(), person.getLastName()).get(0);
+	}
+	
+	public List<Person> deletePerson(String firstName, String lastName) {
+		
+		if (firstName != null && lastName != null) {
+			if(getPersons(firstName, lastName).get(0) != null)
+				jsonReader.getData().getPersons().remove(getPersons(firstName, lastName).get(0));
+		}
+		return getPersons(firstName, lastName);
 	}
 	
 }
