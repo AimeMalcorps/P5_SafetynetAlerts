@@ -1,8 +1,6 @@
 package com.safetynet.alerts.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Person {
 	
@@ -19,11 +17,6 @@ public class Person {
 	private List<String> allergies;
 
 	public String getFirstName() {
-		
-		Map<String, Object> test = new HashMap<String, Object>();
-		test.put("person", new Person());
-		test.put("caserne", new Firestation());
-		
 		return firstName;
 	}
 

@@ -30,8 +30,8 @@ public class PersonController {
 	}
 
 	@GetMapping(value = "/childAlert")
-	public Childalert getChildAlert(@RequestParam String adress) throws JSONException, IOException, ParseException {
-		return personService.getChildAlert(adress);
+	public Childalert getChildAlert(@RequestParam String address) throws JSONException, IOException, ParseException {
+		return personService.getChildAlert(address);
 	}
 
 	@GetMapping(value = "/communityEmail")
