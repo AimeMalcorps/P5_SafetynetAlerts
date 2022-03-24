@@ -11,8 +11,13 @@ import com.safetynet.alerts.model.Medicalrecord;
 @Service
 public class MedicalrecordService {
 
+	private JsonReaderService jsonReader;
+	
 	@Autowired
-	JsonReaderService jsonReader;
+	public MedicalrecordService(JsonReaderService jsonReader) {
+		super();
+		this.jsonReader = jsonReader;
+	}
 	
 	/****** CRUD ******/
 

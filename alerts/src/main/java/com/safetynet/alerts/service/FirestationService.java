@@ -19,11 +19,17 @@ import com.safetynet.alerts.model.PhoneNumber;
 @Service
 public class FirestationService {
 
-	@Autowired
 	JsonReaderService jsonReader;
 
-	@Autowired
 	MedicalrecordService medicalrecordService;
+	
+	
+	@Autowired
+	public FirestationService(JsonReaderService jsonReader, MedicalrecordService medicalrecordService) {
+		super();
+		this.jsonReader = jsonReader;
+		this.medicalrecordService = medicalrecordService;
+	}
 
 	/** PERSONNES COUVERTES PAR LA CASERNE **/
 	public Firestation getPersonsCovered(Integer stationNumber) throws ParseException {
@@ -68,7 +74,7 @@ public class FirestationService {
 		return firestation;
 	}
 
-	/** LISTE TELEPHONE NUMBERS **/
+	/** LIST PHONE NUMBERS **/
 	public List<PhoneNumber> getPhoneNumberList(Integer stationNumber) {
 
 		List<PhoneNumber> phoneNumberList = new ArrayList<PhoneNumber>();

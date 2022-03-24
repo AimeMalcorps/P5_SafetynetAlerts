@@ -20,11 +20,16 @@ import com.safetynet.alerts.model.Person;
 @Service
 public class PersonService {
 
-	@Autowired
-	JsonReaderService jsonReader;
+	private JsonReaderService jsonReader;
 
+	private MedicalrecordService medicalrecordService;
+	
 	@Autowired
-	MedicalrecordService medicalrecordService;
+	public PersonService(JsonReaderService jsonReader, MedicalrecordService medicalrecordService) {
+		super();
+		this.jsonReader = jsonReader;
+		this.medicalrecordService = medicalrecordService;
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(PersonService.class);
 
