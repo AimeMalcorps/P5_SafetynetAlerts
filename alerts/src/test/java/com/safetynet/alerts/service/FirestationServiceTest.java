@@ -26,7 +26,8 @@ class FirestationServiceTest {
 	
 	@Test
 	public void testPersonsCovered() throws ParseException {
-		assertEquals(5, firestationService.getPersonsCovered(1).getAdults());
+		int b = firestationService.getPersonsCovered(1).getAdults();
+		assertEquals(5, b);
 	}
 	
 	@Test
@@ -54,7 +55,8 @@ class FirestationServiceTest {
 		fs.setStation(46);
 		
 		assertEquals("New York", firestationService.createFirestation(fs).getAddress());
-		assertEquals(46, firestationService.createFirestation(fs).getStation());
+		int b = firestationService.createFirestation(fs).getStation();
+		assertEquals(46, b);
 	}
 	
 	@Test
@@ -67,7 +69,8 @@ class FirestationServiceTest {
 		Firestation fs = new Firestation();
 		fs.setAddress("1509 Culver St");
 		fs.setStation(46);
-		assertEquals(46, firestationService.updateFirestation(fs).getStation());
+		int b = firestationService.updateFirestation(fs).getStation();
+		assertEquals(46, b);
 	}
 	
 	@Test

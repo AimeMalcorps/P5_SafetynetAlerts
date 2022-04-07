@@ -52,12 +52,7 @@ public class PersonService {
 
 			for (Person person : personList) {
 				if (medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()) != null) {
-					person.setBirthdate(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
-							.getBirthdate());
-					person.setMedications(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
-							.getMedications());
-					person.setAllergies(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName())
-							.getAllergies());
+					person.setMedicalrecord(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()));
 				}
 			}
 			return personList;
@@ -79,8 +74,8 @@ public class PersonService {
 		
 		for (Person person : personsAtAdress) {
 
-			person.setBirthdate(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()).getBirthdate());
-			Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(person.getBirthdate());
+			person.setMedicalrecord(medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()));
+			Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(person.getMedicalrecord().getBirthdate());
 			Date date = new Date();
 			int age = jsonReader.calculateAge(birthdate, date);
 
@@ -93,7 +88,7 @@ public class PersonService {
 				child.setLastName(person.getLastName());
 				child.setZip(person.getZip());
 				child.setPhone(person.getPhone());
-				child.setBirthdate(person.getBirthdate());
+				child.setMedicalrecord(person.getMedicalrecord());
 				child.setAge(age);
 				childList.add(child);
 			} else {
