@@ -51,10 +51,10 @@ public class FirestationService {
 		int children = 0;
 
 		for (Person person : personList) {
-			person.setBirthdate(
-					medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()).getBirthdate());
+			person.setMedicalrecord(
+					medicalrecordService.getMedicalrecord(person.getFirstName(), person.getLastName()));
 
-			Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(person.getBirthdate());
+			Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(person.getMedicalrecord().getBirthdate());
 			int age = jsonReader.calculateAge(birthdate, date);
 
 			if (age >= 18) {

@@ -1,7 +1,5 @@
 package com.safetynet.alerts.model;
 
-import java.util.List;
-
 public class Person {
 	
 	private String firstName;
@@ -12,9 +10,7 @@ public class Person {
 	private String phone;
 	private String email;
 	
-	private String birthdate;
-	private List<String> medications;
-	private List<String> allergies;
+	private Medicalrecord medicalrecord;
 
 	public String getFirstName() {
 		return firstName;
@@ -72,27 +68,11 @@ public class Person {
 		this.email = email;
 	}
 
-	public String getBirthdate() {
-		return birthdate;
+	public Medicalrecord getMedicalrecord() {
+		return medicalrecord;
 	}
 
-	public void setBirthdate(String birthdate) {
-		this.birthdate = birthdate;
-	}
-
-	public List<String> getMedications() {
-		return medications;
-	}
-
-	public void setMedications(List<String> medications) {
-		this.medications = medications;
-	}
-
-	public List<String> getAllergies() {
-		return allergies;
-	}
-
-	public void setAllergies(List<String> allergies) {
-		this.allergies = allergies;
+	public void setMedicalrecord(Medicalrecord medicalrecord) {
+		this.medicalrecord = medicalrecord;
 	}
 }
