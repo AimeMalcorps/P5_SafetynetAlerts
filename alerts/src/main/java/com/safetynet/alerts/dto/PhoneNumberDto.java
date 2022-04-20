@@ -1,6 +1,6 @@
-package com.safetynet.alerts.model;
+package com.safetynet.alerts.dto;
 
-public class PhoneNumber {
+public class PhoneNumberDto {
 	
 	private String firstName;
 	private String lastName;

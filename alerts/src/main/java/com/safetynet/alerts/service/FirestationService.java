@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.alerts.dto.FireDto;
+import com.safetynet.alerts.dto.PhoneNumberDto;
 import com.safetynet.alerts.model.Data;
-import com.safetynet.alerts.model.Fire;
 import com.safetynet.alerts.model.Firestation;
 import com.safetynet.alerts.model.Person;
-import com.safetynet.alerts.model.PhoneNumber;
 
 @Service
 public class FirestationService {
@@ -75,9 +75,9 @@ public class FirestationService {
 	}
 
 	/** LIST PHONE NUMBERS **/
-	public List<PhoneNumber> getPhoneNumberList(Integer stationNumber) {
+	public List<PhoneNumberDto> getPhoneNumberList(Integer stationNumber) {
 
-		List<PhoneNumber> phoneNumberList = new ArrayList<PhoneNumber>();
+		List<PhoneNumberDto> phoneNumberList = new ArrayList<PhoneNumberDto>();
 		Data data = jsonReader.getData();
 		List<String> addresses = new ArrayList<String>();
 
@@ -91,7 +91,7 @@ public class FirestationService {
 				.collect(Collectors.toList());
 
 		for (Person person : personList) {
-			PhoneNumber phoneNumber = new PhoneNumber();
+			PhoneNumberDto phoneNumber = new PhoneNumberDto();
 			phoneNumber.setFirstName(person.getFirstName());
 			phoneNumber.setLastName(person.getLastName());
 			phoneNumber.setPhone(person.getPhone());
@@ -102,9 +102,9 @@ public class FirestationService {
 	}
 
 	/** INCENDIE **/
-	public Fire fireAlert(String address) {
+	public FireDto fireAlert(String address) {
 
-		Fire fire = new Fire();
+		FireDto fire = new FireDto();
 		Data data = jsonReader.getData();
 		int firestationNumber = 0;
 

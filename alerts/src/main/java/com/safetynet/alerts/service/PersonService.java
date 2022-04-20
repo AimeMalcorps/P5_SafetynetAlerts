@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.alerts.dto.ChildalertDto;
 import com.safetynet.alerts.model.Child;
-import com.safetynet.alerts.model.Childalert;
 import com.safetynet.alerts.model.Data;
 import com.safetynet.alerts.model.Person;
 
@@ -63,7 +63,7 @@ public class PersonService {
 		}
 	}
 
-	public Childalert getChildAlert(String adress) throws ParseException {
+	public ChildalertDto getChildAlert(String adress) throws ParseException {
 		
 		List<Person> persons = jsonReader.getData().getPersons();
 
@@ -99,7 +99,7 @@ public class PersonService {
 		if (childList.isEmpty()) {
 			return null;
 		} else {
-			Childalert childalert = new Childalert();
+			ChildalertDto childalert = new ChildalertDto();
 			childalert.setListChildren(childList);
 			childalert.setOthers(othersList);
 			return childalert;

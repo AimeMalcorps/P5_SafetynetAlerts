@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynet.alerts.model.Fire;
+import com.safetynet.alerts.dto.FireDto;
+import com.safetynet.alerts.dto.PhoneNumberDto;
 import com.safetynet.alerts.model.Firestation;
-import com.safetynet.alerts.model.PhoneNumber;
 import com.safetynet.alerts.service.FirestationService;
 
 @RestController
@@ -31,12 +31,12 @@ public class FirestationController {
 	}
 	
 	@GetMapping(value="/phoneAlert")
-	public List<PhoneNumber> getPhoneNumbers(@RequestParam Integer firestationNumber) throws JSONException, IOException, ParseException {
+	public List<PhoneNumberDto> getPhoneNumbers(@RequestParam Integer firestationNumber) throws JSONException, IOException, ParseException {
 		return firestationService.getPhoneNumberList(firestationNumber);
 	}
 	
 	@GetMapping(value="/fire")
-	public Fire getPhoneNumbers(@RequestParam String address) throws JSONException, IOException, ParseException {
+	public FireDto getPhoneNumbers(@RequestParam String address) throws JSONException, IOException, ParseException {
 		return firestationService.fireAlert(address);
 	}
 	

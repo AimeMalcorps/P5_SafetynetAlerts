@@ -1,6 +1,6 @@
 package com.safetynet.alerts.model;
 
-public class Child extends Person{
+public class Child extends Person {
 	
 	private int age;
 	
