@@ -1,8 +1,11 @@
-package com.safetynet.alerts.model;
+package com.safetynet.alerts.dto;
 
 import java.util.List;
 
-public class Childalert {
+import com.safetynet.alerts.model.Child;
+import com.safetynet.alerts.model.Person;
+
+public class ChildalertDto {
 	
 	private List<Child> listChildren;
 	private List<Person> others;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.safetynet.alerts.model.Childalert;
+import com.safetynet.alerts.dto.ChildalertDto;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
 
@@ -30,7 +30,7 @@ public class PersonController {
 	}
 
 	@GetMapping(value = "/childAlert")
-	public Childalert getChildAlert(@RequestParam String address) throws JSONException, IOException, ParseException {
+	public ChildalertDto getChildAlert(@RequestParam String address) throws JSONException, IOException, ParseException {
 		return personService.getChildAlert(address);
 	}
 

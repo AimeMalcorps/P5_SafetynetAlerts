@@ -1,8 +1,10 @@
-package com.safetynet.alerts.model;
+package com.safetynet.alerts.dto;
 
 import java.util.List;
 
-public class Fire {
+import com.safetynet.alerts.model.Person;
+
+public class FireDto {
 	
 	private int firestationNumber;
 	private List<Person> personList;
